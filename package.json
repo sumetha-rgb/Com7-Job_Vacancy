@@ -1,0 +1,19 @@
+{
+  "name": "com7-job-vacancy",
+  "version": "1.0.0",
+  "description": "COM7 Job Vacancy search web app (Google Apps Script). Source lives in /gas, build output goes to /dist and is pushed to Apps Script via clasp.",
+  "scripts": {
+    "build": "node build.js",
+    "deploy": "node build.js && clasp push",
+    "dev": "nodemon --watch gas --ext html,js,json --exec \"node build.js && clasp push\"",
+    "push": "clasp push -f",
+    "open": "clasp open"
+  },
+  "devDependencies": {
+    "@babel/core": "^8.0.1",
+    "@babel/preset-react": "^8.0.1",
+    "@google/clasp": "^3.4.1",
+    "fs-extra": "^11.4.0",
+    "nodemon": "^3.1.14"
+  }
+}

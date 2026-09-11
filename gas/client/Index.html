@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base target="_top">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/png" href="https://drive.google.com/uc?export=view&id=1olsp8TIPaP7xTZhLmzEjjdjp-5oWmezr&.png">
+  <link rel="shortcut icon" href="https://drive.google.com/uc?export=view&id=1olsp8TIPaP7xTZhLmzEjjdjp-5oWmezr&.png">
+  <link rel="apple-touch-icon" href="https://drive.google.com/uc?export=view&id=1olsp8TIPaP7xTZhLmzEjjdjp-5oWmezr&.png">
+
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --green: #5bba47;
+      --green-dark: #4a9c3a;
+      --gray: #8a8c8e;
+      --ink: #2a2d2e;
+      --bg: #ffffff;
+      --card: #ffffff;
+      --border: #e7e9e7;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Noto Sans Thai', 'Segoe UI', sans-serif;
+      color: var(--ink);
+      min-height: 100vh;
+      background: var(--bg);
+      position: relative;
+    }
+    /* พื้นหลังเต็มหน้าจอ: เอา gradient สีขาว/เทาที่เดิมบังภาพออก */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      width: 100%;
+      height: 100vh;
+      background-image: url('https://www.comseven.com/wp-content/uploads/2024/03/2024-03-19-New-Welcome-Com7-2024.jpg');
+      background-size: cover;
+      background-position: center top;
+      background-repeat: no-repeat;
+      pointer-events: none;
+    }
+    .page {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 28px 20px 60px;
+      position: relative;
+    }
+
+    /* ---------- Hero ---------- */
+    .hero {
+      position: relative;
+      background: #ffffff;
+      border-radius: 22px;
+      padding: 40px 40px 46px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: 0 10px 30px rgba(20, 30, 20, 0.05);
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      opacity: 0.08;
+      background:
+        repeating-linear-gradient(115deg, var(--green) 0 2px, transparent 2px 22px);
+      mask-image: linear-gradient(120deg, #000 10%, transparent 70%);
+    }
+    .hero-top {
+      position: relative;
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 26px;
+    }
+    .hero-logo svg { height: 30px; width: auto; display: block; }
+    .hero-eyebrow {
+      position: relative;
+      color: var(--green-dark);
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      font-size: 13px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .hero-title {
+      position: relative;
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1.35;
+      max-width: 560px;
+    }
+
+    /* ---------- Search card ---------- */
+    .search-section {
+      margin-top: 34px;
+      text-align: center;
+    }
+    .search-title {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 10px 22px;
+      margin: 0 auto 22px;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.82);
+      background: rgba(255, 255, 255, 0.94);
+      color: #1f2937;
+      font-size: 15px;
+      font-weight: 500;
+      line-height: 1.4;
+      text-align: center;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+    }
+    .search-box {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 24px;
+      box-shadow: 0 8px 24px rgba(20, 30, 20, 0.04);
+    }
+    .input-wrap {
+      position: relative;
+      margin-bottom: 14px;
+    }
+    .input-wrap svg.icon {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 18px;
+      height: 18px;
+      stroke: var(--gray);
+    }
+    input[type="text"] {
+      width: 100%;
+      padding: 15px 16px 15px 46px;
+      border-radius: 12px;
+      border: 1.5px solid var(--border);
+      font-size: 15px;
+      font-family: inherit;
+      background: #fafbfa;
+      outline: none;
+      transition: border-color 0.15s, background 0.15s;
+    }
+    input[type="text"]:focus {
+      border-color: var(--green);
+      background: #ffffff;
+    }
+    .btn-search {
+      width: 100%;
+      padding: 14px 16px;
+      border: none;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--green), var(--green-dark));
+      color: #fff;
+      font-size: 16px;
+      font-weight: 700;
+      font-family: inherit;
+      cursor: pointer;
+      transition: opacity 0.15s, transform 0.1s;
+      letter-spacing: 0.3px;
+    }
+    .btn-search:hover { opacity: 0.92; }
+    .btn-search:active { transform: scale(0.99); }
+    .btn-link {
+      background: none;
+      border: none;
+      color: var(--gray);
+      font-size: 13px;
+      font-family: inherit;
+      cursor: pointer;
+      margin-top: 12px;
+      text-decoration: underline;
+    }
+
+    /* ---------- Results ---------- */
+    .results { margin-top: 26px; }
+    .results-count {
+      font-size: 13px;
+      color: var(--ink);
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      margin-bottom: 12px;
+      padding: 10px 14px;
+      box-shadow: 0 6px 18px rgba(20, 30, 20, 0.06);
+    }
+    .results-count strong { color: var(--ink); }
+    .job-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 18px 20px;
+      margin-bottom: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      transition: box-shadow 0.15s, border-color 0.15s;
+    }
+    .job-card:hover {
+      box-shadow: 0 6px 18px rgba(20, 30, 20, 0.06);
+      border-color: #d7ecd1;
+    }
+    .job-main { min-width: 0; }
+    .job-tags {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 8px;
+    }
+    .job-position {
+      display: inline-block;
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--green-dark);
+      background: #eef8ec;
+      padding: 3px 10px;
+      border-radius: 20px;
+    }
+    .job-bu {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 11px;
+      font-weight: 700;
+      color: #ffffff;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      background: linear-gradient(135deg, #29b6e8, #00A0E2);
+      padding: 3px 11px;
+      border-radius: 20px;
+      border: 1px solid #00A0E2;
+      font-family: inherit;
+      cursor: pointer;
+      transition: transform 0.1s, box-shadow 0.15s, opacity 0.15s;
+      box-shadow: 0 3px 8px rgba(0, 160, 226, 0.28);
+    }
+    .job-bu:hover { opacity: 0.92; transform: translateY(-1px); }
+    .job-bu:active { transform: translateY(0) scale(0.97); }
+    .job-bu.is-active, .bu-chip.is-active {
+      outline: 3px solid rgba(20, 25, 20, 0.22);
+      outline-offset: 2px;
+    }
+
+    /* ---------- BU filter chips (นิยามฐานต้องมาก่อนคลาสสีแบรนด์ ---------- */
+    /* เพื่อให้ background/border/color ของสีแบรนด์ทับ .bu-chip ได้ ไม่ใช่กลับกัน) */
+    .bu-filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 14px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 12px 14px;
+      box-shadow: 0 6px 18px rgba(20, 30, 20, 0.06);
+    }
+    .bu-filter-label {
+      font-size: 12.5px;
+      color: var(--gray);
+      margin-right: 2px;
+    }
+    .bu-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 700;
+      color: #00A0E2;
+      background: rgba(0, 160, 226, 0.1);
+      border: 1px solid #bfe6f8;
+      padding: 5px 12px;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: transform 0.1s, opacity 0.15s, background 0.15s;
+    }
+    .bu-chip:hover { opacity: 0.85; }
+    .bu-chip:active { transform: scale(0.97); }
+    .bu-chip-clear {
+      color: var(--gray);
+      background: #f2f4f2;
+      border-color: var(--border);
+    }
+
+    /* ---------- สี BU ตามแบรนด์ (ตัวอักษร + กรอบเป็นสีแบรนด์ พื้นหลังอ่อนๆ) ---------- */
+    /* ต้องอยู่หลัง .job-bu และ .bu-chip เสมอ เพื่อให้สีแบรนด์ชนะใน CSS cascade */
+    .job-bu-banana, .bu-chip-banana {
+      background: rgba(255, 230, 0, 0.14);
+      border-color: #FFE600;
+      color: #b9a600;
+      box-shadow: none;
+    }
+    .job-bu-studio7, .bu-chip-studio7 {
+      background: rgba(0, 200, 83, 0.14);
+      border-color: #00C853;
+      color: #00A344;
+      box-shadow: none;
+    }
+    .job-bu-true, .bu-chip-true {
+      background: rgba(236, 33, 39, 0.1);
+      border-color: #EC2127;
+      color: #EC2127;
+      box-shadow: none;
+    }
+    /* Dtac สลับมาใช้สีเดิมของค่า default (ที่ไม่เข้าเงื่อนไข BU ไหนเลย) ส่วนค่า default สลับไปใช้สีฟ้า Dtac เดิมแทน (ดู .job-bu / .bu-chip ด้านบน) */
+    .job-bu-dtac, .bu-chip-dtac {
+      background: rgba(47, 95, 214, 0.1);
+      border-color: #2f5fd6;
+      color: #2f5fd6;
+      box-shadow: none;
+    }
+    .job-shop {
+      font-size: 15.5px;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 3px;
+      overflow-wrap: anywhere;
+    }
+    .job-meta {
+      font-size: 13px;
+      color: var(--gray);
+    }
+
+    .btn-apply {
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+      font-family: inherit;
+      font-size: 13.5px;
+      font-weight: 700;
+      color: #fff;
+      background: linear-gradient(135deg, var(--green), var(--green-dark));
+      padding: 10px 18px;
+      border-radius: 999px;
+      border: 2px solid transparent;
+      box-shadow: 0 6px 16px rgba(91, 186, 71, 0.32);
+      transition: transform 0.12s, box-shadow 0.15s, opacity 0.15s;
+      white-space: nowrap;
+    }
+    .btn-apply:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 20px rgba(91, 186, 71, 0.42);
+      opacity: 0.96;
+    }
+    .btn-apply:active { transform: translateY(0) scale(0.98); }
+    .btn-apply svg { width: 15px; height: 15px; flex-shrink: 0; }
+
+    .state-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: fit-content;
+      max-width: min(92%, 760px);
+      margin: 30px auto 0;
+      padding: 18px 28px;
+      border-radius: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.84);
+      background: rgba(255, 255, 255, 0.95);
+      color: #1f2937;
+      font-size: 15px;
+      font-weight: 500;
+      line-height: 1.6;
+      text-align: center;
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.12);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+    }
+
+    .state-box .emoji {
+      filter: drop-shadow(0 2px 3px rgba(255,255,255,0.9));
+    }
+    .state-box .emoji { font-size: 34px; display: block; margin-bottom: 10px; }
+
+    .spinner {
+      width: 26px; height: 26px;
+      border: 3px solid #dfe7dd;
+      border-top-color: var(--green);
+      border-radius: 50%;
+      margin: 0 auto 12px;
+      animation: spin 0.8s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      color: #4b5563;
+      font-size: 12px;
+      text-shadow: 0 1px 3px rgba(255, 255, 255, 0.9);
+    }
+    .line-contact {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      font-family: inherit;
+      font-size: 13.5px;
+      font-weight: 700;
+      color: #06C755;
+      background: #eafcf1;
+      border: 1px solid #b9ecc9;
+      padding: 9px 18px 9px 9px;
+      border-radius: 999px;
+      transition: transform 0.12s, opacity 0.15s, box-shadow 0.15s;
+    }
+    .line-contact:hover { opacity: 0.9; transform: translateY(-1px); box-shadow: 0 6px 16px rgba(6, 199, 85, 0.22); }
+    .line-contact:active { transform: translateY(0) scale(0.98); }
+    .line-contact-icon {
+      width: 26px; height: 26px; border-radius: 50%; flex-shrink: 0;
+      background: #06C755;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .line-contact-icon svg { width: 15px; height: 15px; }
+
+    @media (max-width: 480px) {
+      .hero { padding: 28px 22px 34px; border-radius: 18px; }
+      .hero-title { font-size: 21px; }
+      .job-card { flex-direction: column; align-items: flex-start; }
+      .btn-apply { align-self: stretch; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <div class="hero">
+      <div class="hero-bg"></div>
+      <div class="hero-top">
+        <div class="hero-logo">
+          <!-- COM7 logo (สี #8a8c8e / #5bba47) -->
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1513 533" width="140" height="49">
+            <path fill="#8a8c8e" fill-rule="evenodd" d="m479.3 450.4c-85.8 0-155.1-69.4-155.1-155.1 0-85.8 69.3-155.2 155.1-155.2 85.8 0 155.1 69.4 155.1 155.2 0 85.7-69.3 155.1-155.1 155.1zm94.3-155.1c0-52.2-42.2-94.4-94.3-94.4-52.2 0-94.3 42.2-94.3 94.4 0 52.1 42.1 94.3 94.3 94.3 52.1 0 94.3-42.2 94.3-94.3zm184.5-153.8h60.1v308.9h-60.1zm-38.7 0v308.9h-60.8v-278.5c0-16.6 13.8-30.4 30.4-30.4zm167.9 0c16.6 0 30.4 13.8 30.4 30.4v278.5h-60.8v-308.9zm-582.5 195.5c-17.9 65.7-78 113.4-149.2 113.4-85 0-154.8-69.1-154.8-154.8 0-85.7 69.8-154.8 154.8-154.8 71.9 0 132 49.1 149.9 115.4h-64.2c-15.2-32.5-47.7-55.3-85.7-55.3-51.8 0-94.7 42.9-94.7 94.7 0 51.8 42.9 94.7 94.7 94.7 37.3 0 69.1-22.2 84.3-53.3z"/>
+            <path fill="#5bba47" d="m1375.1 98l-34.6-34.6-40.8-40.8c-29.7-29-77.3-29-106.4 0l-70.4 70.5-4.9 4.9zm-260.4 106.4v-103l-2.8 2.8-2.8 2.7-107.1 107.2c-29 29-29 76.7 0 106.4l150 149.9 126.4-266zm381.4 15.2q-2.1-2.8-4.8-5.5l-58.1-58.1-175.5 376.6q1.4-0.7 2.8-0.7 0 0 0.7 0c13.8-2.7 27.6-9.6 38.7-20.7l75.3-75.3 3.4-3.5 112-112.6c27.6-27 29.7-70.5 5.5-100.2z"/>
+          </svg>
+        </div>
+      </div>
+      <div class="hero-eyebrow">Let's create a new experience</div>
+      <div class="hero-title">ค้นหาตำแหน่งงานว่างของบริษัทคอมเซเว่น</div>
+    </div>
+
+    <div class="search-section">
+      <div class="search-title">พิมพ์จังหวัดที่คุณสนใจสมัครงาน</div>
+      <div class="search-box">
+        <div class="input-wrap">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="7"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input type="text" id="provinceInput" list="provinceList" placeholder="พิมพ์ชื่อจังหวัด เช่น ชลบุรี, เชียงใหม่..." autocomplete="off">
+          <datalist id="provinceList"></datalist>
+        </div>
+        <button class="btn-search" onclick="doSearch()">ค้นหาตำแหน่งงานว่าง</button>
+        <button class="btn-link" onclick="clearSearch()">ล้างการค้นหา</button>
+      </div>
+    </div>
+
+    <div class="results" id="results"></div>
+
+    <footer>
+      <a id="lineContactLink" class="line-contact" href="https://page.line.me/comsevencareer" target="_blank" rel="noopener">
+        <span class="line-contact-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+          </svg>
+        </span>
+        สอบถามเพิ่มเติม
+      </a>
+    </footer>
+  </div>
+
+  <script>
+    let allData = [];
+    let APPLY_FORM_URL = 'https://forms.gle/Y3RERjgbvKhzZnba6';
+    let LINE_CONTACT_URL = 'https://page.line.me/comsevencareer';
+    let currentProvinceMatches = []; // ผลลัพธ์ทั้งหมดของจังหวัดที่ค้นหาล่าสุด (ก่อนกรอง BU)
+    let currentProvinceQuery = '';
+    let activeBuFilter = '';
+
+    function init() {
+      renderState('loading');
+      google.script.run
+        .withSuccessHandler(onConfigLoaded)
+        .withFailureHandler(function () {}) // ถ้าโหลด config ไม่ได้ ใช้ลิงก์ default ที่ตั้งไว้ด้านบน
+        .getClientConfig();
+
+      google.script.run
+        .withSuccessHandler(onDataLoaded)
+        .withFailureHandler(onError)
+        .getVacancyData();
+    }
+
+    function onConfigLoaded(cfg) {
+      if (cfg && cfg.applyFormUrl) APPLY_FORM_URL = cfg.applyFormUrl;
+      if (cfg && cfg.lineContactUrl) {
+        LINE_CONTACT_URL = cfg.lineContactUrl;
+        const link = document.getElementById('lineContactLink');
+        if (link) link.href = LINE_CONTACT_URL;
+      }
+    }
+
+    function onError(err) {
+      renderState('error', String(err));
+    }
+
+    function onDataLoaded(data) {
+      allData = data || [];
+      const provinces = Array.from(new Set(allData.map(r => r.province).filter(Boolean)))
+        .sort((a, b) => a.localeCompare(b, 'th'));
+      const dl = document.getElementById('provinceList');
+      dl.innerHTML = provinces.map(p => '<option value="' + p + '">').join('');
+      renderState('idle');
+    }
+
+    function doSearch() {
+      const q = document.getElementById('provinceInput').value.trim();
+      if (!q) { renderState('idle'); return; }
+      const matches = allData.filter(r => (r.province || '').indexOf(q) !== -1);
+      currentProvinceMatches = matches;
+      currentProvinceQuery = q;
+      activeBuFilter = '';
+      renderResults(matches, q);
+    }
+
+    function clearSearch() {
+      document.getElementById('provinceInput').value = '';
+      currentProvinceMatches = [];
+      currentProvinceQuery = '';
+      activeBuFilter = '';
+      renderState('idle');
+    }
+
+    // แมปสีตามแบรนด์ BU: BaNANA=เหลือง, Studio7=เขียว, True Shop=แดง, DTAC=ฟ้าเข้ม
+    // ใช้ "ตรงตัวทั้งคำ" เท่านั้น เพื่อไม่ให้ BaNANA Outlet ไปโดนสีของ BaNANA ด้วย
+    function buColorSuffix(bu) {
+      const s = String(bu || '').toLowerCase().replace(/\s+/g, '');
+      if (s.indexOf('banana') !== -1) return 'banana';
+      if (s === 'studio7') return 'studio7';
+      if (s === 'trueshop') return 'true';
+      if (s === 'dtac') return 'dtac';
+      return '';
+    }
+
+    // กดที่แท็ก/ปุ่ม BU บนการ์ดตำแหน่งงาน หรือที่แถบตัวกรอง เพื่อกรองดูเฉพาะ BU นั้น
+    function filterByBU(bu) {
+      activeBuFilter = (activeBuFilter === bu) ? '' : bu; // กดซ้ำ = ยกเลิกตัวกรอง
+      renderResults(currentProvinceMatches, currentProvinceQuery);
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+      document.getElementById('provinceInput').addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') doSearch();
+      });
+      init();
+    });
+
+    function renderResults(allMatches, q) {
+      const box = document.getElementById('results');
+      if (!allMatches.length) {
+        box.innerHTML =
+          '<div class="state-box"><span class="emoji">🔎</span>ไม่พบตำแหน่งงานว่างในจังหวัด "' + escapeHtml(q) + '"<br>ลองค้นหาจังหวัดใกล้เคียงดูนะครับ</div>';
+        return;
+      }
+
+      // ปุ่มกรอง BU จะแสดงก็ต่อเมื่อค้นหาจังหวัดแล้วเท่านั้น
+      const buList = Array.from(new Set(allMatches.map(r => r.bu).filter(Boolean)))
+        .sort((a, b) => a.localeCompare(b, 'th'));
+
+      let buBarHtml = '';
+      if (buList.length > 1) {
+        buBarHtml = '<div class="bu-filter-bar"><span class="bu-filter-label">กรองตาม BU:</span>' +
+          buList.map(bu =>
+            '<button type="button" class="bu-chip' + (activeBuFilter === bu ? ' is-active' : '') + (buColorSuffix(bu) ? ' bu-chip-' + buColorSuffix(bu) : '') + '" onclick="filterByBU(\'' + escapeJs(bu) + '\')">' + escapeHtml(bu) + '</button>'
+          ).join('') +
+          (activeBuFilter ? '<button type="button" class="bu-chip bu-chip-clear" onclick="filterByBU(\'\')">ล้างตัวกรอง ✕</button>' : '') +
+          '</div>';
+      }
+
+      const data = activeBuFilter ? allMatches.filter(r => r.bu === activeBuFilter) : allMatches;
+
+      let html = buBarHtml;
+      html += '<div class="results-count">พบตำแหน่งงานว่าง <strong>' + data.length + '</strong> ตำแหน่ง ในจังหวัด "' + escapeHtml(q) + '"' +
+        (activeBuFilter ? ' • BU: <strong>' + escapeHtml(activeBuFilter) + '</strong>' : '') + '</div>';
+
+      if (!data.length) {
+        html += '<div class="state-box"><span class="emoji">🔎</span>ไม่พบตำแหน่งงานของ BU นี้ในจังหวัด "' + escapeHtml(q) + '"</div>';
+        box.innerHTML = html;
+        return;
+      }
+
+      data.forEach(r => {
+        html += '<div class="job-card">' +
+          '<div class="job-main">' +
+            '<div class="job-tags">' +
+              '<span class="job-position">' + escapeHtml(r.position || '-') + '</span>' +
+              (r.bu ? '<button type="button" class="job-bu' + (activeBuFilter === r.bu ? ' is-active' : '') + (buColorSuffix(r.bu) ? ' job-bu-' + buColorSuffix(r.bu) : '') + '" title="ดูเฉพาะตำแหน่งงานของ ' + escapeHtml(r.bu) + '" onclick="filterByBU(\'' + escapeJs(r.bu) + '\')">' + escapeHtml(r.bu) + '</button>' : '') +
+            '</div>' +
+            '<div class="job-shop">' + escapeHtml(r.shop || '-') + '</div>' +
+            '<div class="job-meta">' + escapeHtml(r.province || '') + (r.region ? ' • ' + escapeHtml(r.region) : '') + '</div>' +
+          '</div>' +
+          '<a class="btn-apply" href="' + escapeHtml(APPLY_FORM_URL) + '" target="_blank" rel="noopener">' +
+            '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>' +
+            'สนใจสมัครงาน' +
+          '</a>' +
+        '</div>';
+      });
+      box.innerHTML = html;
+    }
+
+    function renderState(kind, detail) {
+      const box = document.getElementById('results');
+      if (kind === 'loading') {
+        box.innerHTML = '<div class="state-box"><div class="spinner"></div>กำลังโหลดข้อมูลตำแหน่งงาน...</div>';
+      } else if (kind === 'error') {
+        box.innerHTML = '<div class="state-box"><span class="emoji">⚠️</span>เกิดข้อผิดพลาดในการโหลดข้อมูล<br>' + escapeHtml(detail || '') + '</div>';
+      } else {
+        box.innerHTML = '<div class="state-box"><span class="emoji">📍</span>กรอกชื่อจังหวัดด้านบนเพื่อค้นหาตำแหน่งงานว่าง</div>';
+      }
+    }
+
+    function escapeHtml(str) {
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+    }
+
+    // ใช้เมื่อต้องแทรกค่าลงใน onclick="...('...')" ป้องกันเครื่องหมาย ' หรือ \ ทำให้ inline handler พัง
+    function escapeJs(str) {
+      return String(str).replace(/\\/g, '\\\\').replace(/'/g, "\\'");
+    }
+  </script>
+</body>
+</html>
