@@ -84,7 +84,7 @@ com7-Job-Vacacy/
 เปิดเว็บแอปแล้วต่อท้าย URL ด้วย `?page=admin` เช่น
 `https://script.google.com/macros/s/XXXXXXXX/exec?page=admin`
 
-- รหัสผ่านเริ่มต้น: `com7admin` (**ควรเข้าไปเปลี่ยนทันทีหลัง deploy ครั้งแรก** ในหัวข้อ "เปลี่ยนรหัสผ่านแอดมิน")
+
 
 ### แท็บ ฐานข้อมูลตำแหน่งงาน
 
